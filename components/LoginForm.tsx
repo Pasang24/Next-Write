@@ -40,11 +40,13 @@ function LoginForm() {
 
     const users: User[] = JSON.parse(localStorage.getItem("users") || "[]");
 
-    let userExists = users.some(
+    let user = users.find(
       (user) => user.email === email && user.password === password
     );
 
-    if (userExists) {
+    if (user) {
+      localStorage.setItem("loggedInUser", JSON.stringify(user));
+      localStorage.setItem("isLoggedIn", JSON.stringify(true));
       router.replace("/blogs");
     } else {
       setValidationError("Invalid Email or Password!");
