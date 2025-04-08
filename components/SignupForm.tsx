@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Button } from "./ui/button";
 import Link from "next/link";
 import { User } from "@/types";
+import { toast } from "sonner";
 
 function SignupForm() {
   const [name, setName] = useState("");
@@ -55,6 +56,14 @@ function SignupForm() {
     let userAlreadyExists = users.some((user) => user.email === email);
 
     if (userAlreadyExists) {
+      toast.error("User Already Exists", {
+        description:
+          "User with the email address already exists. Please use another email",
+        action: {
+          label: "Close",
+          onClick: () => {},
+        },
+      });
       console.log("User Already exists");
     } else {
       let newUser: User = {
