@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Button, buttonVariants } from "./ui/button";
 import Container from "./Container";
+import ThemeToggleButton from "./ui/ThemeToggleButton";
 
 function Navbar() {
   return (
@@ -10,7 +11,7 @@ function Navbar() {
           NextWrite
         </Link>
         <div className="flex gap-2">
-          <Button variant="outline">Select Theme</Button>
+          <ThemeToggleButton />
           <Link
             href="/login"
             className={`${buttonVariants({
