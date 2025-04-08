@@ -4,14 +4,74 @@ import { useState } from "react";
 import { Button } from "./ui/button";
 import Link from "next/link";
 
+interface User {
+  name: string;
+  email: string;
+  password: string;
+}
+
 function SignupForm() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [errors, setErrors] = useState({
+    nameError: "",
+    emailError: "",
+    passwordError: "",
+  });
 
   const signupHandler = (event: React.FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
     // logic for handling signup
+    const EMAIL_REGEX = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    const PASSWORD_REGEX = /^(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{8,}$/;
+
+    setErrors({
+      nameError: "",
+      emailError: "",
+      passwordError: "",
+    });
+
+    if (name.trim().length === 0) {
+      setErrors((prev) => ({
+        ...prev,
+        nameError: "Please enter a valid Username!",
+      }));
+      return;
+    }
+    if (!EMAIL_REGEX.test(email)) {
+      setErrors((prev) => ({
+        ...prev,
+        emailError: "Please enter a valid email!",
+      }));
+      return;
+    }
+    if (!PASSWORD_REGEX.test(password)) {
+      setErrors((prev) => ({
+        ...prev,
+        passwordError:
+          "Password must be 8 characters long with one uppercase and one speacial character",
+      }));
+      return;
+    }
+
+    const users: User[] = JSON.parse(localStorage.getItem("users") || "[]");
+
+    let userAlreadyExists = users.some((user) => user.email === email);
+
+    if (userAlreadyExists) {
+      console.log("User Already exists");
+    } else {
+      let newUser: User = {
+        name,
+        email,
+        password,
+      };
+
+      const updatedUsers: User[] = [...users, newUser];
+
+      localStorage.setItem("users", JSON.stringify(updatedUsers));
+    }
   };
 
   return (
@@ -31,6 +91,9 @@ function SignupForm() {
           id="name"
           className="p-2 rounded-sm border-2 text-sm"
         />
+        {errors.nameError && (
+          <span className="text-xs text-red-400">{errors.nameError}</span>
+        )}
       </div>
       <div className="flex flex-col gap-2">
         <label htmlFor="email" className="font-semibold">
@@ -44,6 +107,9 @@ function SignupForm() {
           id="email"
           className="p-2 rounded-sm border-2 text-sm"
         />
+        {errors.emailError && (
+          <span className="text-xs text-red-400">{errors.emailError}</span>
+        )}
       </div>
       <div className="flex flex-col gap-2">
         <label htmlFor="password" className="font-semibold">
@@ -57,6 +123,9 @@ function SignupForm() {
           id="password"
           className="p-2 rounded-sm border-2 text-sm"
         />
+        {errors.passwordError && (
+          <span className="text-xs text-red-400">{errors.passwordError}</span>
+        )}
       </div>
       <Button className="cursor-pointer">Create Account</Button>
       <p className="text-center">
