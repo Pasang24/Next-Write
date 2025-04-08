@@ -3,12 +3,7 @@
 import { useState } from "react";
 import { Button } from "./ui/button";
 import Link from "next/link";
-
-interface User {
-  name: string;
-  email: string;
-  password: string;
-}
+import { User } from "@/types";
 
 function SignupForm() {
   const [name, setName] = useState("");
