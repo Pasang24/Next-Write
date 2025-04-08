@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { Button } from "./ui/button";
 import Link from "next/link";
 import { User } from "@/types";
@@ -15,6 +16,8 @@ function SignupForm() {
     emailError: "",
     passwordError: "",
   });
+
+  const router = useRouter();
 
   const signupHandler = (event: React.FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
@@ -75,6 +78,7 @@ function SignupForm() {
       const updatedUsers: User[] = [...users, newUser];
 
       localStorage.setItem("users", JSON.stringify(updatedUsers));
+      router.push("/login");
     }
   };
 
