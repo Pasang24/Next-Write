@@ -118,3 +118,10 @@
     @apply bg-background text-foreground;
   }
 }
+
+.ql-container {
+  font-size: 20px !important;
+}
+.quill > .ql-container > .ql-editor.ql-blank::before {
+  color: gray;
+}
