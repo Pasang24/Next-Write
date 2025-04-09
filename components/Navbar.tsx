@@ -1,9 +1,20 @@
+"use client";
+
 import Link from "next/link";
 import { Button, buttonVariants } from "./ui/button";
 import Container from "./Container";
 import ThemeToggleButton from "./ui/ThemeToggleButton";
+import { redirect } from "next/navigation";
 
-function Navbar() {
+interface NavbarProps {
+  authenticatedRoute?: boolean;
+}
+
+function Navbar({ authenticatedRoute = false }: NavbarProps) {
+  const logoutHandler = () => {
+    localStorage.removeItem("isLoggedIn");
+    redirect("/login");
+  };
   return (
     <nav>
       <Container className="flex justify-between items-center">
@@ -12,14 +23,21 @@ function Navbar() {
         </Link>
         <div className="flex gap-2">
           <ThemeToggleButton />
-          <Link
-            href="/login"
-            className={`${buttonVariants({
-              variant: "default",
-            })}`}
-          >
-            Get Started
-          </Link>
+          {authenticatedRoute ? (
+            <>
+              <Link href="/add-blog">Write</Link>
+              <Button onClick={logoutHandler}>Logout</Button>
+            </>
+          ) : (
+            <Link
+              href="/login"
+              className={`${buttonVariants({
+                variant: "default",
+              })}`}
+            >
+              Get Started
+            </Link>
+          )}
         </div>
       </Container>
     </nav>

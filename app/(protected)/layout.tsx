@@ -1,4 +1,5 @@
 import AuthGuard from "@/components/AuthGuard";
+import Navbar from "@/components/Navbar";
 import React from "react";
 
 function layout({
@@ -6,7 +7,12 @@ function layout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return <AuthGuard authenticatedRoute>{children}</AuthGuard>;
+  return (
+    <AuthGuard authenticatedRoute>
+      <Navbar authenticatedRoute />
+      {children}
+    </AuthGuard>
+  );
 }
 
 export default layout;
