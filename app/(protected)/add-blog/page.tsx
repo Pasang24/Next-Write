@@ -1,13 +1,10 @@
 import Container from "@/components/Container";
+import BlogForm from "@/components/BlogForm";
 
 function AddBlog() {
   return (
-    <Container>
-      <input
-        type="text"
-        className="text-3xl w-full outline-none"
-        placeholder="Title"
-      />
+    <Container className="pt-6">
+      <BlogForm />
     </Container>
   );
 }

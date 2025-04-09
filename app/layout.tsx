@@ -3,6 +3,7 @@ import { Poppins } from "next/font/google";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { Toaster } from "@/components/ui/sonner";
 import "./globals.css";
+import "react-quill-new/dist/quill.bubble.css";
 
 const poppins = Poppins({
   subsets: ["latin"],
