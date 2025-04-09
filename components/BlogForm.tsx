@@ -4,10 +4,15 @@ import { useState } from "react";
 import ReactQuill from "react-quill-new";
 import { Button } from "./ui/button";
 import { Plus } from "lucide-react";
+import { ImageInput } from "./ImageInput";
+import Image from "next/image";
 
 function BlogForm() {
+  const [image, setImage] = useState("");
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
+
+  const images = ["/images/image1.jpg"];
 
   const submitHandler = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -23,6 +28,14 @@ function BlogForm() {
         <Plus />
         Publish
       </Button>
+      {image ? (
+        <Image src={image} alt="blog-image" width={100} height={100} />
+      ) : (
+        <ImageInput
+          images={images}
+          onChange={(selectedImage) => setImage(selectedImage)}
+        />
+      )}
       <input
         type="text"
         value={title}
