@@ -4,7 +4,7 @@ import BlogForm from "@/components/BlogForm";
 function AddBlog() {
   return (
     <Container className="pt-6">
-      <BlogForm />
+      <BlogForm mode="create" />
     </Container>
   );
 }

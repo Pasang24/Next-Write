@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ReactQuill from "react-quill-new";
 import { Button } from "./ui/button";
 import { Plus } from "lucide-react";
@@ -8,7 +8,12 @@ import { ImageInput } from "./ImageInput";
 import { Blog } from "@/types";
 import { redirect } from "next/navigation";
 
-function BlogForm() {
+interface BlogFormProps {
+  mode: "create" | "edit";
+  blogId?: number;
+}
+
+function BlogForm({ mode, blogId }: BlogFormProps) {
   const [image, setImage] = useState("");
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -29,24 +34,56 @@ function BlogForm() {
     // logic for adding new blog
     const blogs: Blog[] = JSON.parse(localStorage.getItem("blogs") || "[]");
 
-    // if there are no blogs then just assign id as 1
-    // else get id of the last created blog and add one to create id for new blog
-    const newId =
-      blogs.length === 0 ? 1 : Math.max(...blogs.map((blog) => blog.id)) + 1;
+    if (mode === "create") {
+      // if there are no blogs then just assign id as 1
+      // else get id of the last created blog and add one to create id for new blog
+      const newId =
+        blogs.length === 0 ? 1 : Math.max(...blogs.map((blog) => blog.id)) + 1;
 
-    const newBlog: Blog = {
-      id: newId,
-      title,
-      description,
-      image,
-      createdAt: new Date().toISOString(),
-    };
+      const newBlog: Blog = {
+        id: newId,
+        title,
+        description,
+        image,
+        createdAt: new Date().toISOString(),
+      };
 
-    const updatedBlogs: Blog[] = [...blogs, newBlog];
+      const updatedBlogs: Blog[] = [...blogs, newBlog];
 
-    localStorage.setItem("blogs", JSON.stringify(updatedBlogs));
-    redirect("/blogs");
+      localStorage.setItem("blogs", JSON.stringify(updatedBlogs));
+      redirect("/blogs");
+    } else {
+      const updatedBlogs = blogs.map((blog) =>
+        blog.id !== blogId
+          ? blog
+          : {
+              ...blog,
+              title,
+              description,
+              image,
+              updatedAt: new Date().toISOString(),
+            }
+      );
+
+      localStorage.setItem("blogs", JSON.stringify(updatedBlogs));
+      redirect(`/blogs/${blogId}`);
+    }
   };
+
+  //this useEffect is used only to fetch data for blog when we are editing it
+  useEffect(() => {
+    if (mode === "edit") {
+      const blogs: Blog[] = JSON.parse(localStorage.getItem("blogs") || "[]");
+
+      const blog = blogs.find((blog) => blog.id === blogId);
+
+      if (blog) {
+        setTitle(blog.title);
+        setImage(blog.image);
+        setDescription(blog.description);
+      }
+    }
+  }, []);
 
   return (
     <form onSubmit={submitHandler} className="flex flex-col gap-2">
@@ -55,7 +92,7 @@ function BlogForm() {
         variant={"default"}
       >
         <Plus />
-        Publish
+        {mode === "edit" ? "Update" : "Publish"}
       </Button>
       <ImageInput
         currentImage={image}
