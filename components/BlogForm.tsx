@@ -5,11 +5,13 @@ import ReactQuill from "react-quill-new";
 import { Button } from "./ui/button";
 import { Plus } from "lucide-react";
 import { ImageInput } from "./ImageInput";
+import { Blog } from "@/types";
+import { redirect } from "next/navigation";
 
 function BlogForm() {
   const [image, setImage] = useState("");
   const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
+  const [description, setDescription] = useState("");
 
   const images = [
     "/images/image1.png",
@@ -25,6 +27,25 @@ function BlogForm() {
   const submitHandler = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     // logic for adding new blog
+    const blogs: Blog[] = JSON.parse(localStorage.getItem("blogs") || "[]");
+
+    // if there are no blogs then just assign id as 1
+    // else get id of the last created blog and add one to create id for new blog
+    const newId =
+      blogs.length === 0 ? 1 : Math.max(...blogs.map((blog) => blog.id)) + 1;
+
+    const newBlog: Blog = {
+      id: newId,
+      title,
+      description,
+      image,
+      createdAt: new Date().toISOString(),
+    };
+
+    const updatedBlogs: Blog[] = [...blogs, newBlog];
+
+    localStorage.setItem("blogs", JSON.stringify(updatedBlogs));
+    redirect("/blogs");
   };
 
   return (
@@ -51,8 +72,8 @@ function BlogForm() {
       <ReactQuill
         theme="bubble"
         placeholder="Tell your story..."
-        value={content}
-        onChange={(value) => setContent(value)}
+        value={description}
+        onChange={(value) => setDescription(value)}
       />
     </form>
   );
