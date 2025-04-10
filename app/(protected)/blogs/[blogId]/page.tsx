@@ -4,7 +4,7 @@ import Container from "@/components/Container";
 import { Button } from "@/components/ui/button";
 import { Blog } from "@/types";
 import Image from "next/image";
-import { notFound, useParams, useRouter } from "next/navigation";
+import { notFound, redirect, useParams, useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
 function BlogView() {
@@ -20,6 +20,18 @@ function BlogView() {
     });
 
     return convertedDate;
+  };
+
+  const deleteHandler = () => {
+    const blogs: Blog[] = JSON.parse(localStorage.getItem("blogs") || "[]");
+
+    const updatedBlogs = blogs.filter(
+      (blog) => blog.id !== parseInt(blogId as string)
+    );
+
+    localStorage.setItem("blogs", JSON.stringify(updatedBlogs));
+
+    redirect("/blogs");
   };
 
   useEffect(() => {
@@ -40,6 +52,7 @@ function BlogView() {
     <Container className="flex flex-col gap-4 mt-10">
       <h2 className="text-4xl font-bold">{blog.title}</h2>
       <p>Posted on: {convertDate(blog.createdAt)}</p>
+      {blog?.updatedAt && <p>Edited on: {convertDate(blog.updatedAt)}</p>}
       <div className="flex gap-1">
         <Button
           onClick={() => router.push(`/blogs/${blogId}/edit`)}
@@ -47,9 +60,10 @@ function BlogView() {
         >
           Edit
         </Button>
-        <Button variant={"ghost"}>Delete</Button>
+        <Button onClick={deleteHandler} variant={"ghost"}>
+          Delete
+        </Button>
       </div>
-      {blog?.updatedAt && <p>Edited on: {convertDate(blog.updatedAt)}</p>}
       <Image
         src={blog.image}
         alt="blog-image"
