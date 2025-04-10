@@ -6,6 +6,7 @@ import { Blog } from "@/types";
 import Image from "next/image";
 import { notFound, redirect, useParams, useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
+import { Pen, Trash2 } from "lucide-react";
 
 function BlogView() {
   const [blog, setBlog] = useState<Blog | null>(null);
@@ -51,17 +52,26 @@ function BlogView() {
   return (
     <Container className="flex flex-col gap-4 mt-10">
       <h2 className="text-4xl font-bold">{blog.title}</h2>
-      <p>Posted on: {convertDate(blog.createdAt)}</p>
-      {blog?.updatedAt && <p>Edited on: {convertDate(blog.updatedAt)}</p>}
+      <div className="flex gap-4">
+        <p>Posted: {convertDate(blog.createdAt)}</p>
+        {blog?.updatedAt && <p>Edited: {convertDate(blog.updatedAt)}</p>}
+      </div>
       <div className="flex gap-1">
         <Button
           onClick={() => router.push(`/blogs/${blogId}/edit`)}
           variant={"ghost"}
+          className="text-gray-600 dark:text-gray-400 cursor-pointer"
         >
-          Edit
+          <Pen />
+          Edit Blog
         </Button>
-        <Button onClick={deleteHandler} variant={"ghost"}>
-          Delete
+        <Button
+          onClick={deleteHandler}
+          variant={"ghost"}
+          className="text-red-400 hover:text-red-400 cursor-pointer"
+        >
+          <Trash2 />
+          Delete Blog
         </Button>
       </div>
       <Image
