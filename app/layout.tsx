@@ -21,7 +21,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html
+      lang="en"
+      className="scrollbar-gutter-stable"
+      suppressHydrationWarning
+    >
       <body className={`${poppins.className} antialiased`}>
         <ThemeProvider
           attribute="class"

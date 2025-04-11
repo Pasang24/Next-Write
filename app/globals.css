@@ -128,6 +128,9 @@
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
+  .scrollbar-gutter-stable {
+    scrollbar-gutter: stable;
+  }
 }
 
 .ql-container {
