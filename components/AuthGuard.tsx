@@ -1,6 +1,6 @@
 "use client";
 
-import { redirect } from "next/navigation";
+import { redirect, usePathname } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
 interface AuthGuardProps {
@@ -10,6 +10,9 @@ interface AuthGuardProps {
 
 function AuthGuard({ children, authenticatedRoute = false }: AuthGuardProps) {
   const [showPage, setShowPage] = useState(false);
+
+  const pathname = usePathname();
+
   useEffect(() => {
     const isLoggedIn: boolean = JSON.parse(
       localStorage.getItem("isLoggedIn") || "false"
@@ -29,7 +32,7 @@ function AuthGuard({ children, authenticatedRoute = false }: AuthGuardProps) {
     else {
       setShowPage(true);
     }
-  }, []);
+  }, [pathname]);
 
   if (!showPage) return null;
 
