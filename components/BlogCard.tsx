@@ -38,7 +38,7 @@ function BlogCard({ blog }: BlogCardProps) {
           src={blog.image}
           alt="blog-image"
           width={400}
-          height={400}
+          height={225}
           className="w-full"
         />
       </div>

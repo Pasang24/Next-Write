@@ -24,7 +24,7 @@ export function ImageInput({
   return (
     <div className="flex flex-col items-center gap-6 sm:flex-row">
       {currentImage && (
-        <Image src={currentImage} alt="blogg-image" width={300} height={300} />
+        <Image src={currentImage} alt="blog-image" width={300} height={168} />
       )}
       <div className="flex gap-2">
         <Dialog>
@@ -58,7 +58,7 @@ export function ImageInput({
                         alt="blog-image"
                         className="w-full cursor-pointer hover:scale-110 transition"
                         width={100}
-                        height={100}
+                        height={56}
                       />
                     </div>
                   </DialogClose>
