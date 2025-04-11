@@ -1,6 +1,6 @@
 "use client";
 
-import { Moon, Sun, Computer } from "lucide-react";
+import { Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
 
 import { Button } from "@/components/ui/button";
@@ -17,7 +17,6 @@ function ThemeToggleButton() {
   const themeOptions = [
     { theme: "light", name: "Light", icon: <Sun /> },
     { theme: "dark", name: "Dark", icon: <Moon /> },
-    { theme: "system", name: "System", icon: <Computer /> },
   ];
 
   return (
