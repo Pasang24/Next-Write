@@ -4,10 +4,11 @@ import Container from "@/components/Container";
 import { Button } from "@/components/ui/button";
 import { Blog } from "@/types";
 import Image from "next/image";
-import { notFound, redirect, useParams, useRouter } from "next/navigation";
+import { notFound, useParams, useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { Pen, Trash2 } from "lucide-react";
-import { deleteBlog, getBlogById } from "@/lib/BlogStorage";
+import { getBlogById } from "@/lib/BlogStorage";
+import { DeleteBlogButton } from "@/components/DeleteBlogButton";
 
 function BlogView() {
   const [blog, setBlog] = useState<Blog | null>(null);
@@ -22,11 +23,6 @@ function BlogView() {
     });
 
     return convertedDate;
-  };
-
-  const deleteHandler = () => {
-    deleteBlog(parseInt(blogId as string));
-    redirect("/blogs");
   };
 
   useEffect(() => {
@@ -57,14 +53,7 @@ function BlogView() {
           <Pen />
           Edit Blog
         </Button>
-        <Button
-          onClick={deleteHandler}
-          variant={"ghost"}
-          className="text-red-400 hover:text-red-400 cursor-pointer"
-        >
-          <Trash2 />
-          Delete Blog
-        </Button>
+        <DeleteBlogButton blogId={parseInt(blogId as string)} />
       </div>
       <Image
         src={blog.image}
