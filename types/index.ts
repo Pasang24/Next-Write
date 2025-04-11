@@ -12,3 +12,5 @@ export interface Blog {
   createdAt: string;
   updatedAt?: string;
 }
+
+export type Params = Record<string, string>;

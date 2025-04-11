@@ -2,7 +2,7 @@
 
 import Container from "@/components/Container";
 import { Button } from "@/components/ui/button";
-import { Blog } from "@/types";
+import { Blog, Params } from "@/types";
 import Image from "next/image";
 import { notFound, useParams, useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
@@ -12,7 +12,7 @@ import { DeleteBlogButton } from "@/components/DeleteBlogButton";
 
 function BlogView() {
   const [blog, setBlog] = useState<Blog | null>(null);
-  const { blogId } = useParams();
+  const { blogId } = useParams<Params>();
   const router = useRouter();
 
   const convertDate = (date: string): string => {
@@ -26,7 +26,7 @@ function BlogView() {
   };
 
   useEffect(() => {
-    const blog = getBlogById(parseInt(blogId as string));
+    const blog = getBlogById(parseInt(blogId));
 
     if (blog) {
       setBlog(blog);
@@ -53,7 +53,7 @@ function BlogView() {
           <Pen />
           Edit Blog
         </Button>
-        <DeleteBlogButton blogId={parseInt(blogId as string)} />
+        <DeleteBlogButton blogId={parseInt(blogId)} />
       </div>
       <Image
         src={blog.image}
