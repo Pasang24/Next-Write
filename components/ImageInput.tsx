@@ -43,7 +43,7 @@ export function ImageInput({
               )}
             </Button>
           </DialogTrigger>
-          <DialogContent className="w-4/5 max-w-[700px] max-h-[calc(100%-100px)] overflow-y-scroll">
+          <DialogContent className="w-4/5 max-w-[700px] max-h-[calc(100vh-100px)] overflow-y-auto no-scrollbar">
             <DialogHeader>
               <DialogTitle>Select Image</DialogTitle>
             </DialogHeader>
