@@ -7,6 +7,7 @@ import { Plus } from "lucide-react";
 import { ImageInput } from "./ImageInput";
 import { Blog } from "@/types";
 import { redirect } from "next/navigation";
+import { addBlog, getBlogById, updateBlog } from "@/lib/BlogStorage";
 
 interface BlogFormProps {
   mode: "create" | "edit";
@@ -31,41 +32,25 @@ function BlogForm({ mode, blogId }: BlogFormProps) {
 
   const submitHandler = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    // logic for adding new blog
-    const blogs: Blog[] = JSON.parse(localStorage.getItem("blogs") || "[]");
 
     if (mode === "create") {
-      // if there are no blogs then just assign id as 1
-      // else get id of the last created blog and add one to create id for new blog
-      const newId =
-        blogs.length === 0 ? 1 : Math.max(...blogs.map((blog) => blog.id)) + 1;
-
-      const newBlog: Blog = {
-        id: newId,
+      const newBlog: Omit<Blog, "id" | "createdAt"> = {
         title,
         description,
         image,
-        createdAt: new Date().toISOString(),
       };
 
-      const updatedBlogs: Blog[] = [...blogs, newBlog];
-
-      localStorage.setItem("blogs", JSON.stringify(updatedBlogs));
+      addBlog(newBlog);
       redirect("/blogs");
     } else {
-      const updatedBlogs = blogs.map((blog) =>
-        blog.id !== blogId
-          ? blog
-          : {
-              ...blog,
-              title,
-              description,
-              image,
-              updatedAt: new Date().toISOString(),
-            }
-      );
+      const updatedBlog: Omit<Blog, "createdAt"> = {
+        id: blogId as number,
+        title,
+        description,
+        image,
+      };
 
-      localStorage.setItem("blogs", JSON.stringify(updatedBlogs));
+      updateBlog(updatedBlog);
       redirect(`/blogs/${blogId}`);
     }
   };
@@ -73,9 +58,7 @@ function BlogForm({ mode, blogId }: BlogFormProps) {
   //this useEffect is used only to fetch data for blog when we are editing it
   useEffect(() => {
     if (mode === "edit") {
-      const blogs: Blog[] = JSON.parse(localStorage.getItem("blogs") || "[]");
-
-      const blog = blogs.find((blog) => blog.id === blogId);
+      const blog = getBlogById(blogId as number);
 
       if (blog) {
         setTitle(blog.title);

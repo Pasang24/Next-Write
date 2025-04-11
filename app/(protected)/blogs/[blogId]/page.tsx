@@ -7,6 +7,7 @@ import Image from "next/image";
 import { notFound, redirect, useParams, useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { Pen, Trash2 } from "lucide-react";
+import { deleteBlog, getBlogById } from "@/lib/BlogStorage";
 
 function BlogView() {
   const [blog, setBlog] = useState<Blog | null>(null);
@@ -24,21 +25,12 @@ function BlogView() {
   };
 
   const deleteHandler = () => {
-    const blogs: Blog[] = JSON.parse(localStorage.getItem("blogs") || "[]");
-
-    const updatedBlogs = blogs.filter(
-      (blog) => blog.id !== parseInt(blogId as string)
-    );
-
-    localStorage.setItem("blogs", JSON.stringify(updatedBlogs));
-
+    deleteBlog(parseInt(blogId as string));
     redirect("/blogs");
   };
 
   useEffect(() => {
-    const blogs: Blog[] = JSON.parse(localStorage.getItem("blogs") || "[]");
-
-    const blog = blogs.find((blog) => blog.id === parseInt(blogId as string));
+    const blog = getBlogById(parseInt(blogId as string));
 
     if (blog) {
       setBlog(blog);

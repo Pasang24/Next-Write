@@ -3,12 +3,13 @@
 import { Blog } from "@/types";
 import { useState, useEffect } from "react";
 import BlogCard from "./BlogCard";
+import { getBlogs } from "@/lib/BlogStorage";
 
 function BlogList() {
   const [blogs, setBlogs] = useState<Blog[]>([]);
 
   useEffect(() => {
-    const blogs: Blog[] = JSON.parse(localStorage.getItem("blogs") || "[]");
+    const blogs = getBlogs();
 
     // sorting blogs based on their creation time to show latest blog first
     const sortedBlogs = blogs.sort((b, a) => {
