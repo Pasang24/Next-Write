@@ -14,9 +14,18 @@ export const setBlogs = (blogs: Blog[]): void => {
 };
 
 // add a new blog
-export const addBlog = (blog: Blog): void => {
+export const addBlog = (blog: Omit<Blog, "id" | "createdAt">): void => {
   const blogs = getBlogs();
-  setBlogs([...blogs, blog]);
+  // if there are no blogs then just assign id as 1
+  // else get id of the last created blog and add one to create id for new blog
+  const newId =
+    blogs.length === 0 ? 1 : Math.max(...blogs.map((blog) => blog.id)) + 1;
+  const newBlog: Blog = {
+    ...blog,
+    id: newId,
+    createdAt: new Date().toISOString(),
+  };
+  setBlogs([...blogs, newBlog]);
 };
 
 // update a blog
