@@ -29,9 +29,11 @@ export const addBlog = (blog: Omit<Blog, "id" | "createdAt">): void => {
 };
 
 // update a blog
-export const updateBlog = (updatedBlog: Blog): void => {
+export const updateBlog = (updatedBlog: Omit<Blog, "createdAt">): void => {
   const updatedBlogs = getBlogs().map((blog) =>
-    blog.id === updatedBlog.id ? updatedBlog : blog
+    blog.id === updatedBlog.id
+      ? { ...blog, ...updatedBlog, updatedAt: new Date().toISOString() }
+      : blog
   );
   setBlogs(updatedBlogs);
 };
