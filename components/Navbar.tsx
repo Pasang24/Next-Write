@@ -17,7 +17,7 @@ function Navbar({ authenticatedRoute = false }: NavbarProps) {
     redirect("/login");
   };
   return (
-    <nav>
+    <nav className="border-b">
       <Container className="flex justify-between items-center">
         <Link
           href={authenticatedRoute ? "/blogs" : "/"}
@@ -25,7 +25,7 @@ function Navbar({ authenticatedRoute = false }: NavbarProps) {
         >
           NextWrite
         </Link>
-        <div className="flex items-center gap-4">
+        <div className="flex items-center">
           <ThemeToggleButton />
           {authenticatedRoute ? (
             <div className="flex">
@@ -34,7 +34,7 @@ function Navbar({ authenticatedRoute = false }: NavbarProps) {
                 className="flex items-center gap-1 px-2 py-1.5 rounded-sm hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50"
               >
                 <SquarePen size={18} />
-                Write
+                <span className="hidden xs:block">Write</span>
               </Link>
               <Button
                 className="text-base cursor-pointer font-normal"
@@ -42,20 +42,20 @@ function Navbar({ authenticatedRoute = false }: NavbarProps) {
                 onClick={logoutHandler}
               >
                 <LogOut />
-                Logout
+                <span className="hidden xs:block">Logout</span>
               </Button>
             </div>
           ) : (
             <div className="flex">
               <Link
                 href="/login"
-                className="flex items-center gap-1 px-2 py-1.5 rounded-sm hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50"
+                className="flex items-center gap-1 p-1 xs:px-2 xs:py-1.5 rounded-sm hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50"
               >
                 Login
               </Link>
               <Link
                 href="/signup"
-                className="flex items-center gap-1 px-2 py-1.5 rounded-sm hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50"
+                className="flex items-center gap-1 p-1 xs:px-2 xs:py-1.5 rounded-sm hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50"
               >
                 Signup
               </Link>
