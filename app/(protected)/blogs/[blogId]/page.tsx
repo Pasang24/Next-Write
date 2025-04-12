@@ -6,7 +6,7 @@ import { Blog, Params } from "@/types";
 import Image from "next/image";
 import { notFound, useParams, useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
-import { Pen, Trash2 } from "lucide-react";
+import { Pen } from "lucide-react";
 import { getBlogById } from "@/lib/BlogStorage";
 import { DeleteBlogButton } from "@/components/DeleteBlogButton";
 

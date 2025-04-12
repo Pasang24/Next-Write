@@ -2,7 +2,6 @@
 
 import { Button } from "@/components/ui/button";
 import { redirect } from "next/navigation";
-import React from "react";
 
 function BlogNotFound() {
   return (
