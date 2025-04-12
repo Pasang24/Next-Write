@@ -43,7 +43,6 @@ function LoginForm() {
     );
 
     if (user) {
-      localStorage.setItem("loggedInUser", JSON.stringify(user));
       localStorage.setItem("isLoggedIn", JSON.stringify(true));
       redirect("/blogs");
     } else {

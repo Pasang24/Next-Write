@@ -65,7 +65,6 @@ function SignupForm() {
           onClick: () => {},
         },
       });
-      console.log("User Already exists");
     } else {
       let newUser: User = {
         name,
