@@ -1,10 +1,18 @@
 import { Blog } from "@/types";
+import { dummyBlogs } from "@/data/dummyBlogs";
 
 const BLOG_KEY = "blogs";
 
 // get all blogs
 export const getBlogs = (): Blog[] => {
-  const blogs: Blog[] = JSON.parse(localStorage.getItem(BLOG_KEY) || "[]");
+  const storedBlogs = localStorage.getItem(BLOG_KEY);
+
+  if (!storedBlogs) {
+    setBlogs(dummyBlogs);
+    return dummyBlogs;
+  }
+  const blogs: Blog[] = JSON.parse(storedBlogs);
+
   return blogs;
 };
 
