@@ -71,7 +71,7 @@ function BlogView() {
         height={337}
       />
       <div
-        className="prose prose-h1:my-0 prose-h2:my-0 prose-h3:my-0 prose-p:my-0 max-w-none dark:prose-invert mt-6"
+        className="prose prose-h1:my-0 prose-h2:my-0 prose-h3:my-0 prose-p:my-0 prose-h1:font-normal prose-h2:font-normal prose-h3:font--normal max-w-none dark:prose-invert mt-6"
         dangerouslySetInnerHTML={{ __html: blog.description }}
       />
     </Container>
