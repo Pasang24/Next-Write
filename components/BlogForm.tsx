@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import ReactQuill from "react-quill-new";
 import { Button } from "./ui/button";
-import { Plus } from "lucide-react";
+import { Plus, Check, X } from "lucide-react";
 import { ImageInput } from "./ImageInput";
 import { Blog } from "@/types";
 import { notFound, redirect } from "next/navigation";
@@ -55,6 +55,14 @@ function BlogForm({ mode, blogId }: BlogFormProps) {
     }
   };
 
+  const discardHandler = () => {
+    if (mode === "edit") {
+      redirect(`/blogs/${blogId}`);
+    } else {
+      redirect("/blogs");
+    }
+  };
+
   //this useEffect is used only to fetch data for blog when we are editing it
   useEffect(() => {
     if (mode === "edit") {
@@ -72,13 +80,34 @@ function BlogForm({ mode, blogId }: BlogFormProps) {
 
   return (
     <form onSubmit={submitHandler} className="flex flex-col gap-4">
-      <Button
-        className="rounded-sm cursor-pointer self-end"
-        variant={"default"}
-      >
-        <Plus />
-        {mode === "edit" ? "Update" : "Publish"}
-      </Button>
+      <div className="flex self-end gap-2">
+        <Button
+          type="button"
+          onClick={discardHandler}
+          className="rounded-sm cursor-pointer self-end"
+          variant={"outline"}
+        >
+          <X />
+          Cancel
+        </Button>
+        <Button
+          className="rounded-sm cursor-pointer self-end"
+          variant={"default"}
+        >
+          {mode === "edit" ? (
+            <>
+              <Check />
+              Update
+            </>
+          ) : (
+            <>
+              <Plus />
+              Publish
+            </>
+          )}
+        </Button>
+      </div>
+
       <ImageInput
         currentImage={image}
         images={images}
