@@ -139,6 +139,7 @@
   font-family: "poppins", "poppins fallback" !important;
 }
 .quill > .ql-container > .ql-editor.ql-blank::before {
+  left: 0;
   color: gray;
 }
 .ql-editor {

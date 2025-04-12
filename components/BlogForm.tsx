@@ -117,8 +117,8 @@ function BlogForm({ mode, blogId }: BlogFormProps) {
         type="text"
         value={title}
         onChange={(event) => setTitle(event.target.value)}
-        className="text-3xl font-semibold w-full outline-none"
-        placeholder="Title"
+        className="text-3xl font-semibold w-full pb-4 border-b-2 outline-none"
+        placeholder="Blog title here"
       />
       <ReactQuill
         className="w-full"
