@@ -6,7 +6,7 @@ import { Button } from "./ui/button";
 import { Plus } from "lucide-react";
 import { ImageInput } from "./ImageInput";
 import { Blog } from "@/types";
-import { redirect } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { addBlog, getBlogById, updateBlog } from "@/lib/BlogStorage";
 
 interface BlogFormProps {
@@ -64,6 +64,8 @@ function BlogForm({ mode, blogId }: BlogFormProps) {
         setTitle(blog.title);
         setImage(blog.image);
         setDescription(blog.description);
+      } else {
+        return notFound();
       }
     }
   }, []);
