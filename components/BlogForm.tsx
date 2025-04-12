@@ -71,7 +71,7 @@ function BlogForm({ mode, blogId }: BlogFormProps) {
   }, []);
 
   return (
-    <form onSubmit={submitHandler} className="flex flex-col gap-2">
+    <form onSubmit={submitHandler} className="flex flex-col gap-4">
       <Button
         className="rounded-sm cursor-pointer self-end"
         variant={"default"}
@@ -88,10 +88,11 @@ function BlogForm({ mode, blogId }: BlogFormProps) {
         type="text"
         value={title}
         onChange={(event) => setTitle(event.target.value)}
-        className="text-3xl font-semibold w-full outline-none px-4"
+        className="text-3xl font-semibold w-full outline-none"
         placeholder="Title"
       />
       <ReactQuill
+        className="w-full"
         theme="bubble"
         placeholder="Tell your story..."
         value={description}
