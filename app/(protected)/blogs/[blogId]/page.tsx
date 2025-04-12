@@ -39,10 +39,18 @@ function BlogView() {
 
   return (
     <Container className="flex flex-col gap-4 mt-10">
-      <h2 className="text-4xl font-bold">{blog.title}</h2>
+      <h2 className="text-2xl xs:text-3xl sm:text-4xl font-bold">
+        {blog.title}
+      </h2>
       <div className="flex gap-4">
-        <p>Posted: {convertDate(blog.createdAt)}</p>
-        {blog?.updatedAt && <p>Edited: {convertDate(blog.updatedAt)}</p>}
+        <p className="text-sm xs:text-base text-[#d1d5dc]">
+          Posted: {convertDate(blog.createdAt)}
+        </p>
+        {blog?.updatedAt && (
+          <p className="text-sm xs:text-base text-[#d1d5dc]">
+            Edited: {convertDate(blog.updatedAt)}
+          </p>
+        )}
       </div>
       <div className="flex gap-1">
         <Button
@@ -62,7 +70,10 @@ function BlogView() {
         width={600}
         height={337}
       />
-      <div dangerouslySetInnerHTML={{ __html: blog.description }} />
+      <div
+        className="prose prose-h1:my-0 prose-h2:my-0 prose-h3:my-0 prose-p:my-0 max-w-none dark:prose-invert mt-6"
+        dangerouslySetInnerHTML={{ __html: blog.description }}
+      />
     </Container>
   );
 }
