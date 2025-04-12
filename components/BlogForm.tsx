@@ -9,6 +9,7 @@ import { Blog } from "@/types";
 import { notFound, redirect } from "next/navigation";
 import { addBlog, getBlogById, updateBlog } from "@/lib/BlogStorage";
 import { toast } from "sonner";
+import { images } from "@/data/images";
 
 interface BlogFormProps {
   mode: "create" | "edit";
@@ -19,17 +20,6 @@ function BlogForm({ mode, blogId }: BlogFormProps) {
   const [image, setImage] = useState("");
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-
-  const images = [
-    "/images/image1.png",
-    "/images/image2.png",
-    "/images/image3.png",
-    "/images/image4.png",
-    "/images/image5.jpeg",
-    "/images/image6.jpg",
-    "/images/image7.webp",
-    "/images/image8.jpg",
-  ];
 
   const getTextFromHtml = (html: string, maxLength = 150) => {
     const div = document.createElement("div");
