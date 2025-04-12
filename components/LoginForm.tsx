@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { redirect } from "next/navigation";
 import { Button } from "./ui/button";
 import Link from "next/link";
 import { User } from "@/types";
@@ -14,8 +14,6 @@ function LoginForm() {
     passwordError: "",
   });
   const [validationError, setValidationError] = useState("");
-
-  const router = useRouter();
 
   const loginHandler = (event: React.FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
@@ -47,7 +45,7 @@ function LoginForm() {
     if (user) {
       localStorage.setItem("loggedInUser", JSON.stringify(user));
       localStorage.setItem("isLoggedIn", JSON.stringify(true));
-      router.replace("/blogs");
+      redirect("/blogs");
     } else {
       setValidationError("Invalid Email or Password!");
     }
