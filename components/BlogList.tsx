@@ -7,7 +7,7 @@ import { getBlogs } from "@/lib/BlogStorage";
 import EmptyStreetSvg from "./svg/EmptyStreetSvg";
 
 function BlogList() {
-  const [blogs, setBlogs] = useState<Blog[]>([]);
+  const [blogs, setBlogs] = useState<Blog[] | null>(null);
 
   useEffect(() => {
     const blogs = getBlogs();
@@ -22,18 +22,23 @@ function BlogList() {
 
     setBlogs(sortedBlogs);
   }, []);
-  return blogs.length === 0 ? (
-    <div className="flex flex-col items-center gap-4">
-      <div className="w-[90%] max-w-72">
-        <EmptyStreetSvg />
+
+  if (blogs?.length === 0) {
+    return (
+      <div className="flex flex-col items-center gap-4">
+        <div className="w-[90%] max-w-72">
+          <EmptyStreetSvg />
+        </div>
+        <p className="font-semibold text-center">
+          No blogs yet. The city awaits your story..
+        </p>
       </div>
-      <p className="font-semibold text-center">
-        No blogs yet. The city awaits your story..
-      </p>
-    </div>
-  ) : (
+    );
+  }
+
+  return (
     <div className="flex flex-col gap-6">
-      {blogs.map((blog) => (
+      {blogs?.map((blog) => (
         <BlogCard blog={blog} key={blog.id} />
       ))}
     </div>
