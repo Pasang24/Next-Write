@@ -7,9 +7,9 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
+  DialogClose,
 } from "@/components/ui/dialog";
 import { deleteBlog } from "@/lib/BlogStorage";
-import { DialogClose } from "@radix-ui/react-dialog";
 import { Trash2 } from "lucide-react";
 import { redirect } from "next/navigation";
 
@@ -33,7 +33,7 @@ export function DeleteBlogButton({ blogId }: DeleteBlogButtonProps) {
           Delete Blog
         </Button>
       </DialogTrigger>
-      <DialogContent className="max-w-[300px]">
+      <DialogContent className="w-[90%] max-w-[300px]">
         <DialogHeader>
           <DialogTitle>Delete Blog</DialogTitle>
           <DialogDescription>
