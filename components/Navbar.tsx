@@ -1,21 +1,16 @@
 "use client";
 
 import Link from "next/link";
-import { Button, buttonVariants } from "./ui/button";
 import Container from "./Container";
 import ThemeToggleButton from "./ui/ThemeToggleButton";
-import { redirect } from "next/navigation";
-import { SquarePen, LogOut } from "lucide-react";
+import { SquarePen } from "lucide-react";
+import LogoutButton from "./LogoutButton";
 
 interface NavbarProps {
   authenticatedRoute?: boolean;
 }
 
 function Navbar({ authenticatedRoute = false }: NavbarProps) {
-  const logoutHandler = () => {
-    localStorage.removeItem("isLoggedIn");
-    redirect("/login");
-  };
   return (
     <nav className="border-b">
       <Container className="flex justify-between items-center">
@@ -36,14 +31,7 @@ function Navbar({ authenticatedRoute = false }: NavbarProps) {
                 <SquarePen size={18} />
                 <span className="hidden xs:block">Write</span>
               </Link>
-              <Button
-                className="text-base cursor-pointer font-normal"
-                variant={"ghost"}
-                onClick={logoutHandler}
-              >
-                <LogOut />
-                <span className="hidden xs:block">Logout</span>
-              </Button>
+              <LogoutButton />
             </div>
           ) : (
             <div className="flex">
