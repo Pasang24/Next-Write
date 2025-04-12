@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import ReactQuill from "react-quill-new";
 import { Button } from "./ui/button";
 import { Plus, Check, X } from "lucide-react";
 import { ImageInput } from "./ImageInput";
@@ -10,6 +9,9 @@ import { notFound, redirect } from "next/navigation";
 import { addBlog, getBlogById, updateBlog } from "@/lib/BlogStorage";
 import { toast } from "sonner";
 import { images } from "@/data/images";
+import dynamic from "next/dynamic";
+
+const ReactQuill = dynamic(() => import("react-quill-new"), { ssr: false });
 
 interface BlogFormProps {
   mode: "create" | "edit";
