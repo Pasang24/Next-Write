@@ -8,6 +8,7 @@ import { ImageInput } from "./ImageInput";
 import { Blog } from "@/types";
 import { notFound, redirect } from "next/navigation";
 import { addBlog, getBlogById, updateBlog } from "@/lib/BlogStorage";
+import { toast } from "sonner";
 
 interface BlogFormProps {
   mode: "create" | "edit";
@@ -30,8 +31,27 @@ function BlogForm({ mode, blogId }: BlogFormProps) {
     "/images/image8.jpg",
   ];
 
+  const getTextFromHtml = (html: string, maxLength = 150) => {
+    const div = document.createElement("div");
+    div.innerHTML = html;
+    const text = div.textContent || div.innerText || "";
+    if (text.length <= maxLength) return text;
+    const trimmed = text.slice(0, maxLength);
+    return trimmed;
+  };
+
   const submitHandler = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
+    if (!image) {
+      return toast.error("Please add a cover image");
+    }
+    if (title.trim().length === 0) {
+      return toast.error("Please provide a valid title for blog");
+    }
+    if (getTextFromHtml(description).trim().length === 0) {
+      return toast.error("Please provide a valid description for blog");
+    }
 
     if (mode === "create") {
       const newBlog: Omit<Blog, "id" | "createdAt"> = {
