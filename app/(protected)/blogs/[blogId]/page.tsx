@@ -43,11 +43,11 @@ function BlogView() {
         {blog.title}
       </h2>
       <div className="flex gap-4">
-        <p className="text-sm xs:text-base text-[#d1d5dc]">
+        <p className="text-sm xs:text-base text-[#364153] dark:text-[#d1d5dc]">
           Posted: {convertDate(blog.createdAt)}
         </p>
         {blog?.updatedAt && (
-          <p className="text-sm xs:text-base text-[#d1d5dc]">
+          <p className="text-sm xs:text-base text-[#364153] dark:text-[#d1d5dc]">
             Edited: {convertDate(blog.updatedAt)}
           </p>
         )}
