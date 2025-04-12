@@ -54,7 +54,7 @@ function SignupForm() {
 
     const users: User[] = JSON.parse(localStorage.getItem("users") || "[]");
 
-    let userAlreadyExists = users.some((user) => user.email === email);
+    const userAlreadyExists = users.some((user) => user.email === email);
 
     if (userAlreadyExists) {
       toast.error("User Already Exists", {
@@ -66,7 +66,7 @@ function SignupForm() {
         },
       });
     } else {
-      let newUser: User = {
+      const newUser: User = {
         name,
         email,
         password,

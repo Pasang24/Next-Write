@@ -11,7 +11,7 @@ function BlogNotFound() {
           404 Blog Not Found!
         </h2>
         <p className="text-center my-2">
-          Oops! It seems the blog you are looking for doesn't exist
+          Oops! It seems the blog you are looking for doesn&apos;t exist
         </p>
 
         <Button onClick={() => redirect("/blogs")} className="cursor-pointer">

@@ -38,7 +38,7 @@ function LoginForm() {
 
     const users: User[] = JSON.parse(localStorage.getItem("users") || "[]");
 
-    let user = users.find(
+    const user = users.find(
       (user) => user.email === email && user.password === password
     );
 
@@ -92,7 +92,7 @@ function LoginForm() {
       )}
       <Button className="cursor-pointer">Login</Button>
       <p className="text-center">
-        Don't have an account?{" "}
+        Don&apos;t have an account?{" "}
         <Link
           href="/signup"
           className="text-gray-700 underline dark:text-gray-300"

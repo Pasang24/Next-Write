@@ -5,7 +5,7 @@ import Container from "@/components/Container";
 import { Params } from "@/types";
 import { useParams } from "next/navigation";
 
-function page() {
+function EditBlog() {
   const { blogId } = useParams<Params>();
 
   return (
@@ -15,4 +15,4 @@ function page() {
   );
 }
 
-export default page;
+export default EditBlog;

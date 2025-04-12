@@ -24,7 +24,7 @@ function NotFound() {
           404 Page Not Found!
         </h2>
         <p className="text-center my-2">
-          Oops! It seems the page you are looking for doesn't exist
+          Oops! It seems the page you are looking for doesn&apos;t exist
         </p>
 
         <Button
