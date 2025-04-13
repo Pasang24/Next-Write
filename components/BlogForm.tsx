@@ -24,6 +24,15 @@ function BlogForm({ mode, blogId }: BlogFormProps) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
 
+  const modules = {
+    toolbar: [
+      [{ header: [1, 2, false] }],
+      ["bold", "italic", "underline"],
+      [{ list: "ordered" }],
+      ["link"],
+    ],
+  };
+
   const submitHandler = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
@@ -127,9 +136,10 @@ function BlogForm({ mode, blogId }: BlogFormProps) {
       <ReactQuill
         className="w-full"
         theme="bubble"
-        placeholder="Tell your story..."
+        placeholder="Write your blog here... (Tip: Select the text to edit easily)"
         value={description}
         onChange={(value) => setDescription(value)}
+        modules={modules}
       />
     </form>
   );
