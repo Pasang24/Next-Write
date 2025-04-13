@@ -33,7 +33,7 @@ function BlogView() {
     } else {
       return notFound();
     }
-  }, []);
+  }, [blogId]);
 
   if (!blog) return null;
 

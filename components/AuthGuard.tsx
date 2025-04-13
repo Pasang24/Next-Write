@@ -32,7 +32,7 @@ function AuthGuard({ children, authenticatedRoute = false }: AuthGuardProps) {
     else {
       setShowPage(true);
     }
-  }, [pathname]);
+  }, [authenticatedRoute, pathname]);
 
   if (!showPage) return null;
 

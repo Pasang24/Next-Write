@@ -88,7 +88,7 @@ function BlogForm({ mode, blogId }: BlogFormProps) {
         return notFound();
       }
     }
-  }, []);
+  }, [mode, blogId]);
 
   return (
     <form onSubmit={submitHandler} className="flex flex-col gap-4">
