@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   description: "Signup to create a new account",
 };
 
-function Login() {
+function Signup() {
   return (
     <Container className="flex flex-col items-center gap-10">
       <h2 className="text-4xl md:text-5xl font-semibold mt-10 text-center">
@@ -21,4 +21,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default Signup;

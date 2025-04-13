@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import ThemeToggleButton from "./ui/ThemeToggleButton";
+import ThemeToggleButton from "./ThemeToggleButton";
 import { SquarePen } from "lucide-react";
 import LogoutButton from "./LogoutButton";
 
