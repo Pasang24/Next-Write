@@ -39,13 +39,31 @@ function BlogForm({ mode }: BlogFormProps) {
     event.preventDefault();
 
     if (!image) {
-      return toast.error("Please add a cover image");
+      return toast.error("Cover Image Required", {
+        description: "Please add a cover image for your blog",
+        action: {
+          label: "Close",
+          onClick: () => {},
+        },
+      });
     }
     if (title.trim().length === 0) {
-      return toast.error("Please provide a valid title for blog");
+      return toast.error("Blog Title Required", {
+        description: "Please add title for your blog",
+        action: {
+          label: "Close",
+          onClick: () => {},
+        },
+      });
     }
     if (getTextFromHtml(description).trim().length === 0) {
-      return toast.error("Please provide a valid description for blog");
+      return toast.error("Blog Description Required", {
+        description: "Please add description for your blog",
+        action: {
+          label: "Close",
+          onClick: () => {},
+        },
+      });
     }
 
     if (mode === "create") {
