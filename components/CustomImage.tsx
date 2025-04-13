@@ -3,12 +3,12 @@ import { Skeleton } from "./ui/skeleton";
 import Image, { ImageProps } from "next/image";
 
 function CustomImage({ src, alt, width, height, ...props }: ImageProps) {
-  const [loading, setLoading] = useState(true);
+  const [showImage, setShowImage] = useState(false);
   return (
     <div className={`relative aspect-[${width}/${height}]`}>
       <Skeleton
-        className={`absolute top-0 w-full h-full rounded-none transition-all ${
-          !loading ? "invisible" : ""
+        className={`absolute w-full h-full rounded-none  ${
+          showImage ? "invisible" : ""
         }`}
       />
       <Image
@@ -16,9 +16,11 @@ function CustomImage({ src, alt, width, height, ...props }: ImageProps) {
         alt={alt}
         width={width}
         height={height}
-        onLoad={() => setLoading(false)}
-        onError={() => setLoading(false)}
+        onLoad={() => setShowImage(true)}
         {...props}
+        className={`w-full opacity-0 transition-opacity ${
+          showImage ? "opacity-100" : ""
+        }`}
       />
     </div>
   );
