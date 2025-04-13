@@ -7,7 +7,7 @@ function CustomImage({ src, alt, width, height, ...props }: ImageProps) {
   return (
     <div className={`relative aspect-[${width}/${height}]`}>
       <Skeleton
-        className={` w-full h-full rounded-none transition-all ${
+        className={`absolute top-0 w-full h-full rounded-none transition-all ${
           !loading ? "invisible" : ""
         }`}
       />
