@@ -29,6 +29,7 @@ function BlogView() {
     const blog = getBlogById(parseInt(blogId));
 
     if (blog) {
+      document.title = blog.title;
       setBlog(blog);
     } else {
       return notFound();

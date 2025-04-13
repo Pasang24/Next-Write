@@ -1,5 +1,11 @@
 import Container from "@/components/Container";
 import LoginForm from "@/components/LoginForm";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Login | NextWrite",
+  description: "Login to access your account",
+};
 
 function Login() {
   return (
