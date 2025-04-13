@@ -3,6 +3,7 @@
 import { Blog } from "@/types";
 import Image from "next/image";
 import Link from "next/link";
+import { getTextFromHtml } from "@/lib/utils";
 
 interface BlogCardProps {
   blog: Blog;
@@ -14,16 +15,6 @@ function BlogCard({ blog }: BlogCardProps) {
     month: "short",
     day: "numeric",
   });
-
-  //function to get text snippet from blog description
-  const getTextFromHtml = (html: string, maxLength = 150) => {
-    const div = document.createElement("div");
-    div.innerHTML = html;
-    const text = div.textContent || div.innerText || "";
-    if (text.length <= maxLength) return text;
-    const trimmed = text.slice(0, maxLength);
-    return trimmed;
-  };
 
   const blogSnippet = getTextFromHtml(blog.description);
 

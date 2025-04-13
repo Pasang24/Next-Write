@@ -9,6 +9,7 @@ import { notFound, redirect } from "next/navigation";
 import { addBlog, getBlogById, updateBlog } from "@/lib/BlogStorage";
 import { toast } from "sonner";
 import { images } from "@/data/images";
+import { getTextFromHtml } from "@/lib/utils";
 import dynamic from "next/dynamic";
 
 const ReactQuill = dynamic(() => import("react-quill-new"), { ssr: false });
@@ -22,15 +23,6 @@ function BlogForm({ mode, blogId }: BlogFormProps) {
   const [image, setImage] = useState("");
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-
-  const getTextFromHtml = (html: string, maxLength = 150) => {
-    const div = document.createElement("div");
-    div.innerHTML = html;
-    const text = div.textContent || div.innerText || "";
-    if (text.length <= maxLength) return text;
-    const trimmed = text.slice(0, maxLength);
-    return trimmed;
-  };
 
   const submitHandler = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
