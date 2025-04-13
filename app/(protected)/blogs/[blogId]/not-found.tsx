@@ -1,7 +1,5 @@
-"use client";
-
-import { Button } from "@/components/ui/button";
-import { redirect } from "next/navigation";
+import { buttonVariants } from "@/components/ui/button";
+import Link from "next/link";
 
 function BlogNotFound() {
   return (
@@ -14,9 +12,9 @@ function BlogNotFound() {
           Oops! It seems the blog you are looking for doesn&apos;t exist
         </p>
 
-        <Button onClick={() => redirect("/blogs")} className="cursor-pointer">
+        <Link href="/blogs" className={buttonVariants({ variant: "default" })}>
           Go Back
-        </Button>
+        </Link>
       </div>
     </div>
   );

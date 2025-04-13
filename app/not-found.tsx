@@ -1,7 +1,7 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import { redirect } from "next/navigation";
+import { buttonVariants } from "@/components/ui/button";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 
 function NotFound() {
@@ -27,12 +27,12 @@ function NotFound() {
           Oops! It seems the page you are looking for doesn&apos;t exist
         </p>
 
-        <Button
-          onClick={() => redirect(isLoggedIn ? "/blogs" : "/")}
-          className="cursor-pointer"
+        <Link
+          href={isLoggedIn ? "/blogs" : "/"}
+          className={buttonVariants({ variant: "default" })}
         >
           Go Back
-        </Button>
+        </Link>
       </div>
     </div>
   );
