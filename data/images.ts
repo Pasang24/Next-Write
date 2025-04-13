@@ -7,4 +7,6 @@ export const images = [
   "/images/image6.jpg",
   "/images/image7.webp",
   "/images/image8.jpg",
+  "/images/image9.png",
+  "/images/image10.jpg",
 ];
