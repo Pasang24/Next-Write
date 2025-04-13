@@ -1,7 +1,7 @@
 "use client";
 
 import { Blog } from "@/types";
-import Image from "next/image";
+import CustomImage from "./CustomImage";
 import Link from "next/link";
 import { getTextFromHtml } from "@/lib/utils";
 
@@ -24,7 +24,7 @@ function BlogCard({ blog }: BlogCardProps) {
       className="flex flex-col gap-4 border-b pb-6 sm:flex-row sm:items-center sm:gap-6"
     >
       <div className="sm:w-1/2">
-        <Image
+        <CustomImage
           src={blog.image}
           alt="blog-image"
           width={400}

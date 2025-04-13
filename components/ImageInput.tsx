@@ -7,8 +7,8 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import Image from "next/image";
 import { ArrowRightLeft, X } from "lucide-react";
+import CustomImage from "./CustomImage";
 
 interface InputImageProps {
   currentImage: string;
@@ -24,7 +24,12 @@ export function ImageInput({
   return (
     <div className="flex flex-col items-center gap-6 sm:flex-row">
       {currentImage && (
-        <Image src={currentImage} alt="blog-image" width={300} height={168} />
+        <CustomImage
+          src={currentImage}
+          alt="blog-image"
+          width={300}
+          height={168}
+        />
       )}
       <div className="flex gap-2">
         <Dialog>
@@ -52,7 +57,7 @@ export function ImageInput({
                 return (
                   <DialogClose key={image} asChild>
                     <div className="overflow-hidden">
-                      <Image
+                      <CustomImage
                         src={image}
                         onClick={() => onChange(image)}
                         alt="blog-image"

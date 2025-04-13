@@ -3,7 +3,7 @@
 import Container from "@/components/Container";
 import { Button } from "@/components/ui/button";
 import { Blog, Params } from "@/types";
-import Image from "next/image";
+import CustomImage from "@/components/CustomImage";
 import { notFound, useParams, useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { Pen } from "lucide-react";
@@ -64,7 +64,7 @@ function BlogView() {
         </Button>
         <DeleteBlogButton blogId={parseInt(blogId)} />
       </div>
-      <Image
+      <CustomImage
         src={blog.image}
         alt="blog-image"
         className="w-full"
