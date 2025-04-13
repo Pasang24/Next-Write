@@ -4,8 +4,8 @@ import { useEffect, useState } from "react";
 import { Button } from "./ui/button";
 import { Plus, Check, X } from "lucide-react";
 import { ImageInput } from "./ImageInput";
-import { Blog } from "@/types";
-import { notFound, redirect } from "next/navigation";
+import { Blog, Params } from "@/types";
+import { notFound, redirect, useParams } from "next/navigation";
 import { addBlog, getBlogById, updateBlog } from "@/lib/BlogStorage";
 import { toast } from "sonner";
 import { images } from "@/data/images";
@@ -16,13 +16,15 @@ const ReactQuill = dynamic(() => import("react-quill-new"), { ssr: false });
 
 interface BlogFormProps {
   mode: "create" | "edit";
-  blogId?: number;
 }
 
-function BlogForm({ mode, blogId }: BlogFormProps) {
+function BlogForm({ mode }: BlogFormProps) {
   const [image, setImage] = useState("");
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+
+  // blogId will be used only in edit mode
+  const { blogId } = useParams<Params>();
 
   const modules = {
     toolbar: [
@@ -57,7 +59,7 @@ function BlogForm({ mode, blogId }: BlogFormProps) {
       redirect("/blogs");
     } else {
       const updatedBlog: Omit<Blog, "createdAt"> = {
-        id: blogId as number,
+        id: parseInt(blogId),
         title,
         description,
         image,
@@ -79,7 +81,7 @@ function BlogForm({ mode, blogId }: BlogFormProps) {
   //this useEffect is used only to fetch data for blog when we are editing it
   useEffect(() => {
     if (mode === "edit") {
-      const blog = getBlogById(blogId as number);
+      const blog = getBlogById(parseInt(blogId));
 
       if (blog) {
         setTitle(blog.title);
