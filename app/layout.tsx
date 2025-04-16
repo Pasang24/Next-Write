@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
-import { ThemeProvider } from "@/components/ThemeProvider";
+import { ProgressProvider, ThemeProvider } from "@/components/Providers";
 import { Toaster } from "@/components/ui/sonner";
 import "./globals.css";
 import "react-quill-new/dist/quill.bubble.css";
@@ -33,7 +33,7 @@ export default function RootLayout({
           defaultTheme="light"
           disableTransitionOnChange
         >
-          {children}
+          <ProgressProvider>{children}</ProgressProvider>
           <Toaster />
         </ThemeProvider>
       </body>
