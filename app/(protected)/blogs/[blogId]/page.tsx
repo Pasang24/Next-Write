@@ -9,11 +9,13 @@ import React, { useEffect, useState } from "react";
 import { Pen } from "lucide-react";
 import { getBlogById } from "@/lib/BlogStorage";
 import { DeleteBlogButton } from "@/components/DeleteBlogButton";
+import { useProgress } from "@bprogress/next";
 
 function BlogView() {
   const [blog, setBlog] = useState<Blog | null>(null);
   const { blogId } = useParams<Params>();
   const router = useRouter();
+  const { start } = useProgress();
 
   const convertDate = (date: string): string => {
     const convertedDate = new Date(date).toLocaleDateString("en-US", {
@@ -55,7 +57,10 @@ function BlogView() {
       </div>
       <div className="flex gap-1">
         <Button
-          onClick={() => router.push(`/blogs/${blogId}/edit`)}
+          onClick={() => {
+            start();
+            router.push(`/blogs/${blogId}/edit`);
+          }}
           variant={"ghost"}
           className="text-gray-600 dark:text-gray-400 cursor-pointer"
         >
