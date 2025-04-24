@@ -95,7 +95,7 @@ NextWrite is a sleek, minimal blogging platform built with Next.js. Write, edit,
 
 1. Clone the repo:
    ```bash
-   git clone https://gitlab.com/pasang1/e-bazar-blog-app.git
+   git clone https://github.com/Pasang24/Next-Write.git
    ```
 2. Install dependencies:
    ```bash
